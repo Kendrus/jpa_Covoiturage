@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.jpa_covoiturage.TrajetController"
+            styleClass="main-container" prefWidth="1000" prefHeight="700"
+            stylesheets="@trajet.css">
+    <VBox spacing="20">
+        <VBox spacing="20">
+            <HBox alignment="CENTER" styleClass="title-container">
+                <Text text="Gestion des Trajets" styleClass="page-title"/>
+            </HBox>
+            <!-- Le reste de votre contenu reste inchangé -->
+        </VBox>
+        <HBox spacing="10">
+            <VBox spacing="10" styleClass="form-container" prefWidth="400">
+                <TextField fx:id="tfLieuDepart" promptText="Lieu de départ"/>
+                <TextField fx:id="tfLieuArrivee" promptText="Lieu d'arrivée"/>
+                <DatePicker fx:id="dpDateDepart" promptText="Date de départ"/>
+                <TextField fx:id="tfHeureDepart" promptText="Heure de départ (HH:MM)"/>
+                <Label fx:id="heureErrorLabel" textFill="red" visible="false"/>
+                <TextField fx:id="tfPlacesDisponibles" promptText="Places disponibles"/>
+                <TextField fx:id="tfPrix" promptText="Prix"/>
+                <ComboBox fx:id="cbConducteur" promptText="Sélectionner un conducteur"/>
+                <HBox spacing="10">
+                    <Button text="Ajouter" onAction="#ajouterTrajet"/>
+                    <Button text="Modifier" onAction="#modifierTrajet"/>
+                    <Button text="Supprimer" onAction="#supprimerTrajet"/>
+                    <Button text="Rechercher" onAction="#rechercherTrajet"/>
+                </HBox>
+                <TableView fx:id="tableViewTrajets" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <Pane prefWidth="600" prefHeight="700" styleClass="map-pane">
+                <!-- Carte du Sénégal -->
+                <SVGPath
+                        content="M 300 50 Q 250 100 200 150 L 150 300 Q 100 350 50 400 L 100 450 Q 150 500 200 550 L 300 500 Q 350 450 400 400 L 450 350 Q 500 300 550 250 L 500 200 Q 450 150 400 100 Z"
+                        styleClass="map-path"
+                />
+                <!-- Villes -->
+                <Circle centerX="300" centerY="150" radius="5" styleClass="map-city-marker"/>
+                <Text x="310" y="150" text="Dakar" styleClass="map-city-label"/>
+                <Circle centerX="450" centerY="350" radius="5" styleClass="map-city-marker"/>
+                <Text x="460" y="350" text="Saint-Louis" styleClass="map-city-label"/>
+                <Circle centerX="200" centerY="400" radius="5" styleClass="map-city-marker"/>
+                <Text x="210" y="400" text="Kaolack" styleClass="map-city-label"/>
+            </Pane>
+        </HBox>
+    </VBox>
+</AnchorPane>

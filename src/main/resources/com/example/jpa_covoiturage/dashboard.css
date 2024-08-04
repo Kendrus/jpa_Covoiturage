@@ -1,0 +1,80 @@
+/* Styles généraux */
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.hbox, .vbox {
+    -fx-background-color: #3498db; /* Couleur de fond par défaut, remplacée ci-dessous */
+}
+
+.text {
+    -fx-fill: white; /* Couleur par défaut du texte */
+}
+
+/* Style pour l'en-tête */
+.hbox[alignment="CENTER"] {
+    -fx-background-color: #2ecc71; /* Vert pour l'en-tête */
+}
+
+.text[style*="-fx-font-size: 24"] {
+    -fx-fill: white; /* Texte en blanc */
+}
+
+/* Style pour le menu de gauche */
+.vbox[spacing="10"] {
+    -fx-background-color: #27ae60; /* Vert pour le menu de gauche */
+    -fx-pref-width: 200;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-pref-width: 180;
+    -fx-font-size: 14;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #27ae60;
+}
+
+/* Style pour le tableau de bord central */
+.vbox[alignment="CENTER"] {
+    -fx-background-color: #ecf0f1;
+    -fx-spacing: 20;
+}
+
+.text[style*="-fx-font-size: 18"] {
+    -fx-fill: #2c3e50; /* Couleur du texte de bienvenue */
+}
+
+/* Styles pour les graphiques */
+.barchart, .piechart {
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: #27ae60; /* Vert pour les titres des graphiques */
+}
+
+/* Style pour le pied de page */
+.hbox[alignment="CENTER_RIGHT"] {
+    -fx-background-color: #ecf0f1;
+}
+
+.button[style*="-fx-background-color: #e74c3c"] {
+    -fx-background-color: #e67e22; /* Orange pour le bouton de déconnexion */
+    -fx-text-fill: white;
+}
+
+.button[style*="-fx-background-color: #e74c3c"]:hover {
+    -fx-background-color: #d35400; /* Orange foncé pour le survol */
+}

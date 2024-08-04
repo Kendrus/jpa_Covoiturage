@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.chart.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.jpa_covoiturage.DashboardController">
+    <top>
+        <HBox alignment="CENTER" style="-fx-background-color: #4CAF50;">
+            <padding>
+                <Insets top="20" bottom="20"/>
+            </padding>
+            <Text text="Tableau de bord - Système de covoiturage" style="-fx-font-size: 24; -fx-fill: white;"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #2E7D32;" prefWidth="200">
+            <padding>
+                <Insets top="20" right="10" bottom="20" left="10"/>
+            </padding>
+            <Button text="Gestion des utilisateurs" onAction="#handleUserManagement" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-pref-width: 180;"/>
+            <Button text="Gestion des véhicules" onAction="#handleVehicleManagement" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-pref-width: 180;"/>
+            <Button text="Gestion des trajets" onAction="#handleTripManagement" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-pref-width: 180;"/>
+            <Button text="Gestion des réservations" onAction="#handleReservationManagement" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-pref-width: 180;"/>
+            <Button text="Rapports et statistiques" onAction="#handleReportsAndStats" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-pref-width: 180;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" style="-fx-background-color: #F0F4C3;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Text text="Bienvenue sur votre tableau de bord" style="-fx-font-size: 18; -fx-fill: #33691E;"/>
+            <HBox spacing="20" alignment="CENTER">
+                <BarChart fx:id="tripsPerMonthChart" title="Nombre de trajets par mois" style="-fx-background-color: white;">
+                    <xAxis>
+                        <CategoryAxis label="Mois"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Nombre de trajets"/>
+                    </yAxis>
+                </BarChart>
+                <PieChart fx:id="earningsPerMonthChart" title="Montant gagné par mois" style="-fx-background-color: white;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #FFA726;">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+            <Button text="Déconnexion" onAction="#handleLogout" style="-fx-background-color: #FF5722; -fx-text-fill: white;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

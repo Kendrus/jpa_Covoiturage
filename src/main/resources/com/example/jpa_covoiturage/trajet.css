@@ -1,0 +1,164 @@
+.root {
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-container {
+    -fx-background-color: #f0f8ff; /* Bleu très clair */
+    -fx-padding: 20px;
+}
+
+.form-container {
+    -fx-spacing: 15px;
+    -fx-padding: 20px;
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.text-field, .date-picker, .combo-box {
+    -fx-pref-width: 200px;
+    -fx-background-color: #e8f5e9; /* Vert très clair */
+    -fx-border-color: #4CAF50; /* Vert */
+    -fx-border-radius: 3px;
+}
+
+.text-field:focused, .date-picker:focused, .combo-box:focused {
+    -fx-background-color: #c8e6c9; /* Vert clair */
+    -fx-border-color: #2E7D32; /* Vert foncé */
+}
+
+.button {
+    -fx-background-color: #4CAF50; /* Vert */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049; /* Vert plus foncé */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 0, 0);
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-border-color: #4CAF50; /* Vert */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+
+.table-view .column-header {
+    -fx-background-color: #4CAF50; /* Vert */
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f1f8e9; /* Vert très clair */
+}
+
+.table-row-cell:even {
+    -fx-background-color: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #FF9800; /* Orange */
+    -fx-text-fill: white;
+}
+
+/* Style pour la carte SVG */
+.map-pane {
+    -fx-background-color: #e0f2f1; /* Bleu-vert très clair */
+    -fx-border-color: #4CAF50; /* Vert */
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.map-path {
+    -fx-fill: #81c784; /* Vert clair */
+    -fx-stroke: #2E7D32; /* Vert foncé */
+    -fx-stroke-width: 2;
+}
+
+.map-city-marker {
+    -fx-fill: #FF9800; /* Orange */
+    -fx-stroke: #F57C00; /* Orange foncé */
+    -fx-stroke-width: 2;
+}
+
+.map-city-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-fill: #333333;
+}
+.car-icon {
+    -fx-fill: #4CAF50;
+    -fx-stroke: #2E7D32;
+    -fx-stroke-width: 2;
+}
+
+.person-icon {
+    -fx-fill: #FF9800;
+    -fx-stroke: #F57C00;
+    -fx-stroke-width: 2;
+}
+
+.route-arrow {
+    -fx-fill: #2196F3;
+    -fx-stroke: #1976D2;
+    -fx-stroke-width: 2;
+}
+.car-body {
+    -fx-fill: #4CAF50;
+    -fx-stroke: #2E7D32;
+    -fx-stroke-width: 2;
+}
+
+.car-wheel-arch {
+    -fx-fill: #2E7D32;
+}
+
+.car-wheel {
+    -fx-fill: #333333;
+    -fx-stroke: #1B5E20;
+    -fx-stroke-width: 2;
+}
+
+.car-windows {
+    -fx-fill: #BBDEFB;
+    -fx-stroke: #1976D2;
+    -fx-stroke-width: 2;
+}
+
+.car-roof {
+    -fx-fill: #4CAF50;
+    -fx-stroke: #2E7D32;
+    -fx-stroke-width: 2;
+}
+.title-container {
+    -fx-background-color: linear-gradient(to right, #4CAF50, #45a049);
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);
+}
+
+.page-title {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5, 0, 0, 1);
+}
+
+/* Ajustez les styles existants si nécessaire */
+.main-container {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 0 20px 20px 20px; /* Réduisez le padding en haut */
+}
+/
+/* Gardez les autres styles tels quels */

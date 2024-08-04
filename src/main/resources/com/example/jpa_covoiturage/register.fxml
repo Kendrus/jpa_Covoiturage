@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.jpa_covoiturage.RegisterController"
+            prefHeight="400.0" prefWidth="600.0" styleClass="background">
+
+    <VBox alignment="CENTER" spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <Text text="Inscription" styleClass="title"/>
+
+        <GridPane vgap="10" hgap="10">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+            <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            <Label text="Prénom:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="prenomField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+            <Label text="Mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+            <Label text="Confirmer le mot de passe:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+            <Label text="Rôle:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <ComboBox fx:id="roleComboBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="CONDUCTEUR" />
+                        <String fx:value="PASSAGER" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+        </GridPane>
+
+        <Button text="S'inscrire" onAction="#handleRegister" styleClass="register-button"/>
+
+        <Hyperlink text="Déjà inscrit? Connectez-vous" onAction="#switchToLogin"/>
+
+        <Label fx:id="messageLabel" styleClass="message-label"/>
+    </VBox>
+
+</AnchorPane>

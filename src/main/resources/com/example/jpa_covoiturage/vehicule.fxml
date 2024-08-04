@@ -1,0 +1,47 @@
+
+<?import javafx.scene.text.Font?>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpa_covoiturage.VehiculesController">
+    <!-- Contenu du fichier vehicule.fxml -->
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+        <Label text="Gestion des Véhicules" styleClass="title-label">
+            <font>
+                <Font name="System Bold" size="24"/>
+            </font>
+        </Label>
+
+        <HBox spacing="20">
+            <VBox spacing="10" styleClass="form-container" HBox.hgrow="ALWAYS">
+                <Label text="Informations du Véhicule" styleClass="section-label"/>
+                <TextField fx:id="txtMarque" promptText="Marque"/>
+                <TextField fx:id="txtModele" promptText="Modèle"/>
+                <TextField fx:id="txtImmatriculation" promptText="Immatriculation"/>
+                <HBox spacing="10">
+                    <Button text="Ajouter" onAction="#ajouterVehicule" styleClass="action-button"/>
+                    <Button text="Modifier" onAction="#modifierVehicule" styleClass="action-button"/>
+                    <Button text="Supprimer" onAction="#supprimerVehicule" styleClass="action-button"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10" styleClass="search-container" HBox.hgrow="ALWAYS">
+                <Label text="Recherche" styleClass="section-label"/>
+                <TextField fx:id="txtRecherche" promptText="Rechercher un véhicule"/>
+                <Button text="Rechercher" onAction="#rechercherVehicule" styleClass="search-button" maxWidth="Infinity"/>
+            </VBox>
+        </HBox>
+
+        <TableView fx:id="tableVehicules" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colMarque" text="Marque"/>
+                <TableColumn fx:id="colModele" text="Modèle"/>
+                <TableColumn fx:id="colImmatriculation" text="Immatriculation"/>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>
+
+
+

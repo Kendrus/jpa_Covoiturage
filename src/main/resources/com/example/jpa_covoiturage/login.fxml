@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpa_covoiturage.HelloController">
+    <children>
+        <VBox alignment="CENTER" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" spacing="20.0" styleClass="login-panel">
+            <children>
+                <Label styleClass="title-label" text="Connexion Covoiturage">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="userTextF" promptText="Email" styleClass="text-field"/>
+                <PasswordField fx:id="passTextF" promptText="Mot de passe" styleClass="text-field"/>
+                <Button fx:id="signInBtn" mnemonicParsing="false" onAction="#login" styleClass="login-button" text="Se connecter" />
+                <Label fx:id="warnLabel" styleClass="warn-label" text="Email ou mot de passe incorrect" visible="false" />
+                <Hyperlink fx:id="signup" onAction="#viewRegister" styleClass="signup-link" text="Pas encore inscrit? Créer un compte" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

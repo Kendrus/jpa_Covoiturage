@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.jpa_covoiturage.UserController"
+            styleClass="main-container" stylesheets="@user.css">
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+        <Label text="Gestion des Utilisateurs" styleClass="title-label"/>
+
+        <HBox spacing="20">
+            <VBox spacing="10" styleClass="form-container" HBox.hgrow="ALWAYS">
+                <Label text="Informations de l'Utilisateur" styleClass="section-label"/>
+                <TextField fx:id="nomField" promptText="Nom"/>
+                <TextField fx:id="prenomField" promptText="Prénom"/>
+                <TextField fx:id="emailField" promptText="Email"/>
+                <PasswordField fx:id="mdpField" promptText="Mot de passe"/>
+                <ComboBox fx:id="roleComboBox" promptText="Rôle"/>
+                <HBox spacing="10">
+                    <Button text="Ajouter" onAction="#handleAddUser" styleClass="action-button"/>
+                    <Button text="Modifier" onAction="#handleUpdateUser" styleClass="action-button"/>
+                    <Button text="Supprimer" onAction="#handleDeleteUser" styleClass="action-button"/>
+                </HBox>
+            </VBox>
+
+            <VBox spacing="10" styleClass="search-container" HBox.hgrow="ALWAYS">
+                <Label text="Recherche" styleClass="section-label"/>
+                <TextField fx:id="searchField" promptText="Rechercher un utilisateur"/>
+                <Button text="Rechercher" onAction="#handleSearchUser" styleClass="search-button"/>
+            </VBox>
+        </HBox>
+
+        <TableView fx:id="userTableView" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="nomColumn" text="Nom"/>
+                <TableColumn fx:id="prenomColumn" text="Prénom"/>
+                <TableColumn fx:id="emailColumn" text="Email"/>
+                <TableColumn fx:id="roleColumn" text="Rôle"/>
+            </columns>
+        </TableView>
+        <Button text="Retour au Tableau de Bord" onAction="#handleBackToDashboard" styleClass="action-button"/>
+
+    </VBox>
+
+</AnchorPane>
