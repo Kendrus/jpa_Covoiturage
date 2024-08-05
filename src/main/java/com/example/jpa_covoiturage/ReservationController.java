@@ -1,168 +1,166 @@
 package com.example.jpa_covoiturage;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import com.example.jpa_covoiturage.Model.Reservation;
+import com.example.jpa_covoiturage.Model.Trajet;
+import com.example.jpa_covoiturage.Model.User;
+import com.example.jpa_covoiturage.Repository.ReservationRepository;
+import com.example.jpa_covoiturage.Repository.TrajetRepository;
+import com.example.jpa_covoiturage.Repository.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
-import com.example.jpa_covoiturage.Model.Reservation;
-import com.example.jpa_covoiturage.Model.User;
-import com.example.jpa_covoiturage.Model.Trajet;
-import com.example.jpa_covoiturage.Repository.ReservationRepository;
-import com.example.jpa_covoiturage.Repository.UserRepository;
-import com.example.jpa_covoiturage.Repository.TrajetRepository;
+import javafx.event.ActionEvent;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ReservationController {
 
     @FXML
     private TableView<Reservation> reservationsTable;
+
     @FXML
     private TableColumn<Reservation, Long> idColumn;
+
     @FXML
-    private TableColumn<Reservation, String> userColumn;
+    private TableColumn<Reservation, User> userColumn;
+
     @FXML
-    private TableColumn<Reservation, String> trajetColumn;
+    private TableColumn<Reservation, Trajet> trajetColumn;
+
     @FXML
     private TableColumn<Reservation, LocalDate> dateColumn;
 
     @FXML
-    private TextField userField;
+    private TableColumn<Reservation, String> etatColumn;
+
     @FXML
-    private TextField trajetField;
+    private ComboBox<User> userComboBox;
+
+    @FXML
+    private ComboBox<Trajet> trajetComboBox;
+
     @FXML
     private DatePicker datePicker;
+
+    @FXML
+    private Button reserveButton;
 
     private ReservationRepository reservationRepository;
     private UserRepository userRepository;
     private TrajetRepository trajetRepository;
+    public ReservationController() {
+        this.userRepository = UserRepository.create();
+        this.trajetRepository = TrajetRepository.create();
+        this.reservationRepository =ReservationRepository.create();
 
-    private ObservableList<Reservation> reservationList;
-
+    }
+    @FXML
     public void initialize() {
-        reservationRepository = ReservationRepository.create();
-        userRepository = UserRepository.create();
-        trajetRepository = TrajetRepository.create();
-
-        // Initialiser les colonnes de la table
+        // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        userColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getUser().getNom()));
-        trajetColumn.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getTrajet().getLieuDepart()));
+        userColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
+        trajetColumn.setCellValueFactory(new PropertyValueFactory<>("trajet"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
-        // Charger les données
+        // Load users and trajets into ComboBoxes
+        loadUsers();
+        loadTrajets();
+
+        // Load reservations into TableView
         loadReservations();
     }
 
+    private void loadUsers() {
+        if (userRepository == null) {
+            showErrorAlert("Le dépôt des utilisateurs n'est pas initialisé.");
+            return;
+        }
+
+        List<User> users = userRepository.findAll();
+        userComboBox.setItems(FXCollections.observableArrayList(users));
+    }
+
+    private void loadTrajets() {
+        if (trajetRepository == null) {
+            showErrorAlert("Le dépôt des trajets n'est pas initialisé.");
+            return;
+        }
+
+        List<Trajet> trajets = trajetRepository.getAll();
+        trajetComboBox.setItems(FXCollections.observableArrayList(trajets));
+    }
+
     private void loadReservations() {
-        reservationList = FXCollections.observableArrayList(reservationRepository.getAll());
-        reservationsTable.setItems(reservationList);
+        if (reservationRepository == null) {
+            showErrorAlert("Le dépôt des réservations n'est pas initialisé.");
+            return;
+        }
+
+        List<Reservation> reservations = reservationRepository.getAll();
+        reservationsTable.setItems(FXCollections.observableArrayList(reservations));
     }
 
     @FXML
-    private void handleReservation() {
+    private void handleReservation(ActionEvent event) {
         try {
-            Long userId = Long.parseLong(userField.getText());
-            Long trajetId = Long.parseLong(trajetField.getText());
-            LocalDate date = datePicker.getValue();
+            User selectedUser = userComboBox.getValue();
+            Trajet selectedTrajet = trajetComboBox.getValue();
+            LocalDate reservationDate = datePicker.getValue();
 
-            User user = userRepository.findById(userId);
-            Trajet trajet = trajetRepository.findById(trajetId);
-
-            if (user == null || trajet == null) {
-                showAlert("Erreur", "Utilisateur ou trajet non trouvé.");
+            if (selectedUser == null || selectedTrajet == null || reservationDate == null) {
+                showErrorAlert("Veuillez remplir tous les champs.");
                 return;
             }
 
-            Reservation newReservation = new Reservation(user, trajet, date);
-            reservationRepository.save(newReservation);
+            String etat = determineEtat(selectedTrajet.getDateDepart());
 
-            // Rafraîchir la liste des réservations
+            Reservation reservation = new Reservation(selectedUser, selectedTrajet, reservationDate, etat);
+            reservationRepository.save(reservation);
+
             loadReservations();
+            showInfoAlert("Réservation ajoutée avec succès.");
 
-            // Vider les champs du formulaire
-            clearForm();
-
-            showAlert("Succès", "Réservation créée avec succès.");
-        } catch (NumberFormatException e) {
-            showAlert("Erreur", "Veuillez entrer des ID valides pour l'utilisateur et le trajet.");
         } catch (Exception e) {
-            showAlert("Erreur", "Une erreur est survenue lors de la création de la réservation : " + e.getMessage());
+            e.printStackTrace();
+            showErrorAlert("Erreur lors de la création de la réservation : " + e.getMessage());
         }
     }
 
-    private void clearForm() {
-        userField.clear();
-        trajetField.clear();
-        datePicker.setValue(null);
+    private String determineEtat(LocalDate trajetDate) {
+        if (trajetDate.isBefore(LocalDate.now())) {
+            return "En cours";
+        } else {
+            return "Future";
+        }
     }
 
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
+    private void showInfoAlert(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Information");
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 
-    @FXML
-    private void handleDeleteReservation() {
-        Reservation selectedReservation = reservationsTable.getSelectionModel().getSelectedItem();
-        if (selectedReservation != null) {
-            reservationRepository.delete(selectedReservation);
-            loadReservations();
-            showAlert("Succès", "Réservation supprimée avec succès.");
-        } else {
-            showAlert("Erreur", "Veuillez sélectionner une réservation à supprimer.");
-        }
+    private void showErrorAlert(String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
-    @FXML
-    private void handleUpdateReservation() {
-        Reservation selectedReservation = reservationsTable.getSelectionModel().getSelectedItem();
-        if (selectedReservation != null) {
-            try {
-                Long userId = Long.parseLong(userField.getText());
-                Long trajetId = Long.parseLong(trajetField.getText());
-                LocalDate date = datePicker.getValue();
+    // Setters for repositories to be injected
 
-                User user = userRepository.findById(userId);
-                Trajet trajet = trajetRepository.findById(trajetId);
-
-                if (user == null || trajet == null) {
-                    showAlert("Erreur", "Utilisateur ou trajet non trouvé.");
-                    return;
-                }
-
-                selectedReservation.setUser(user);
-                selectedReservation.setTrajet(trajet);
-                selectedReservation.setDate(date);
-
-                reservationRepository.update(selectedReservation);
-                loadReservations();
-                clearForm();
-                showAlert("Succès", "Réservation mise à jour avec succès.");
-            } catch (NumberFormatException e) {
-                showAlert("Erreur", "Veuillez entrer des ID valides pour l'utilisateur et le trajet.");
-            } catch (Exception e) {
-                showAlert("Erreur", "Une erreur est survenue lors de la mise à jour de la réservation : " + e.getMessage());
-            }
-        } else {
-            showAlert("Erreur", "Veuillez sélectionner une réservation à mettre à jour.");
-        }
-    }
-
-    @FXML
-    private void handleSelectReservation() {
-        Reservation selectedReservation = reservationsTable.getSelectionModel().getSelectedItem();
-        if (selectedReservation != null) {
-            userField.setText(String.valueOf(selectedReservation.getUser().getId()));
-            trajetField.setText(String.valueOf(selectedReservation.getTrajet().getId()));
-            datePicker.setValue(selectedReservation.getDate());
-        }
-    }
 }

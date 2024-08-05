@@ -22,14 +22,18 @@ public class Reservation {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
+    @Column(name = "etat", nullable = false) // Ajoutez le champ etat
+    private String etat;
+
     // Constructors, getters, and setters
 
     public Reservation() {}
 
-    public Reservation(User user, Trajet trajet, LocalDate date) {
+    public Reservation(User user, Trajet trajet, LocalDate date, String etat) {
         this.user = user;
         this.trajet = trajet;
         this.date = date;
+        this.etat = etat;
     }
 
     public Long getId() {
@@ -62,5 +66,13 @@ public class Reservation {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 }

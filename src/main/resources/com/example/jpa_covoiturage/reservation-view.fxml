@@ -21,13 +21,19 @@
                     <TableColumn text="Utilisateur" fx:id="userColumn"/>
                     <TableColumn text="Trajet" fx:id="trajetColumn"/>
                     <TableColumn text="Date" fx:id="dateColumn"/>
+                    <TableColumn text="ID Utilisateur" fx:id="userIdColumn"/>
+                    <TableColumn text="ID Trajet" fx:id="trajetIdColumn"/>
+                    <TableColumn text="etat" fx:id="etatColumn"/>
+
+
+
                 </columns>
             </TableView>
         </Tab>
         <Tab text="Nouvelle réservation">
             <VBox spacing="10" styleClass="form-container">
-                <TextField fx:id="userField" promptText="ID Utilisateur"/>
-                <TextField fx:id="trajetField" promptText="ID Trajet"/>
+                <ComboBox fx:id="userComboBox" promptText="Utilisateur"/>
+                <ComboBox fx:id="trajetComboBox" promptText="Trajet"/>
                 <DatePicker fx:id="datePicker" promptText="Date de réservation"/>
                 <Button text="Réserver" onAction="#handleReservation" styleClass="submit-button"/>
             </VBox>

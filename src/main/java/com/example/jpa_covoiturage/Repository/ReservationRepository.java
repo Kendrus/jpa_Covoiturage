@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 public class ReservationRepository {
-
     private EntityManagerFactory emf;
     private EntityManager em;
 
@@ -39,8 +38,16 @@ public class ReservationRepository {
         return query.getResultList();
     }
 
-    public Reservation findById(Long id) {
-        return em.find(Reservation.class, id);
+    public List<Reservation> getReservationsByUser(Long userId) {
+        TypedQuery<Reservation> query = em.createQuery("SELECT r FROM Reservation r WHERE r.user.id = :userId", Reservation.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
+
+    public List<Reservation> getReservationsByTrajet(Long trajetId) {
+        TypedQuery<Reservation> query = em.createQuery("SELECT r FROM Reservation r WHERE r.trajet.id = :trajetId", Reservation.class);
+        query.setParameter("trajetId", trajetId);
+        return query.getResultList();
     }
 
     public void close() {

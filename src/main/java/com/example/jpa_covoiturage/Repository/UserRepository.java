@@ -8,12 +8,14 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class UserRepository {
+
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("PERSISTENCE");
     private final EntityManagerFactory factory;
 
     public UserRepository(EntityManagerFactory factory) {
         this.factory = factory;
     }
+
 
     public static UserRepository create() {
         return new UserRepository(emf);
