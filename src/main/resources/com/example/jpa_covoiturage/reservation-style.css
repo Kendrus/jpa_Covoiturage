@@ -1,0 +1,58 @@
+.main-container {
+    -fx-background-color: #f0f0f0;
+}
+
+.header {
+    -fx-background-color: #4CAF50;
+    -fx-padding: 20px;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+}
+
+.tab-pane {
+    -fx-background-color: white;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #FF9800;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #FFB74D;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #FFA726;
+}
+
+.table-view {
+    -fx-background-color: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: #4CAF50;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+}
+
+.form-container {
+    -fx-padding: 20px;
+}
+
+.text-field, .date-picker {
+    -fx-pref-width: 200px;
+}
+
+.submit-button {
+    -fx-background-color: #FF9800;
+    -fx-text-fill: white;
+}
+
+.submit-button:hover {
+    -fx-background-color: #FFA726;
+}

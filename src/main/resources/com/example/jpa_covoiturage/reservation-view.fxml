@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.jpa_covoiturage.ReservationController"
+      styleClass="main-container"
+      stylesheets="@reservation-style.css">
+
+    <HBox styleClass="header">
+        <Label text="Réservations de Covoiturage" styleClass="title"/>
+    </HBox>
+
+    <TabPane styleClass="tab-pane">
+        <Tab text="Toutes les réservations">
+            <TableView fx:id="reservationsTable" styleClass="table-view">
+                <columns>
+                    <TableColumn text="ID" fx:id="idColumn"/>
+                    <TableColumn text="Utilisateur" fx:id="userColumn"/>
+                    <TableColumn text="Trajet" fx:id="trajetColumn"/>
+                    <TableColumn text="Date" fx:id="dateColumn"/>
+                </columns>
+            </TableView>
+        </Tab>
+        <Tab text="Nouvelle réservation">
+            <VBox spacing="10" styleClass="form-container">
+                <TextField fx:id="userField" promptText="ID Utilisateur"/>
+                <TextField fx:id="trajetField" promptText="ID Trajet"/>
+                <DatePicker fx:id="datePicker" promptText="Date de réservation"/>
+                <Button text="Réserver" onAction="#handleReservation" styleClass="submit-button"/>
+            </VBox>
+        </Tab>
+    </TabPane>
+
+</VBox>

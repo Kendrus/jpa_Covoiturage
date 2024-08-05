@@ -1,48 +1,46 @@
 package com.example.jpa_covoiturage.Repository;
 
 import com.example.jpa_covoiturage.Model.Reservation;
-import com.example.jpa_covoiturage.Model.Trajet;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-public class TrajetRepository {
+public class ReservationRepository {
+
     private EntityManagerFactory emf;
     private EntityManager em;
 
-    private TrajetRepository() {
+    private ReservationRepository() {
         emf = Persistence.createEntityManagerFactory("PERSISTENCE");
         em = emf.createEntityManager();
     }
 
-    public static TrajetRepository create() {
-        return new TrajetRepository();
+    public static ReservationRepository create() {
+        return new ReservationRepository();
     }
 
-    public void save(Trajet trajet) {
-        executeInTransaction(() -> em.persist(trajet));
+    public void save(Reservation reservation) {
+        executeInTransaction(() -> em.persist(reservation));
     }
 
-    public void update(Trajet trajet) {
-        executeInTransaction(() -> em.merge(trajet));
+    public void update(Reservation reservation) {
+        executeInTransaction(() -> em.merge(reservation));
     }
 
-    public void delete(Trajet trajet) {
+    public void delete(Reservation reservation) {
         executeInTransaction(() -> {
-            Trajet toDelete = em.merge(trajet);
+            Reservation toDelete = em.merge(reservation);
             em.remove(toDelete);
         });
     }
 
-    public List<Trajet> getAll() {
-        TypedQuery<Trajet> query = em.createQuery("SELECT t FROM Trajet t", Trajet.class);
+    public List<Reservation> getAll() {
+        TypedQuery<Reservation> query = em.createQuery("SELECT r FROM Reservation r", Reservation.class);
         return query.getResultList();
     }
 
-    public List<Trajet> searchTrajets(String searchTerm) {
-        TypedQuery<Trajet> query = em.createQuery("SELECT t FROM Trajet t WHERE t.lieuDepart LIKE :searchTerm OR t.lieuArrivee LIKE :searchTerm", Trajet.class);
-        query.setParameter("searchTerm", "%" + searchTerm + "%");
-        return query.getResultList();
+    public Reservation findById(Long id) {
+        return em.find(Reservation.class, id);
     }
 
     public void close() {
@@ -69,9 +67,4 @@ public class TrajetRepository {
             throw e;
         }
     }
-
-    public Trajet findById(Long id) {
-        return em.find(Trajet.class, id);
-    }
-
 }

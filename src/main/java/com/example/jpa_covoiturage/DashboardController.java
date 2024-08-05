@@ -91,7 +91,12 @@ public class DashboardController {
 
     @FXML
     private void handleReservationManagement(ActionEvent event) {
-        showNotImplementedAlert("Gestion des réservations");
+        try {
+            loadFXML(event, "reservation-view.fxml", "Gestion des Reservations");
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Erreur lors du chargement de la page reservation : " + e.getMessage());
+        }
     }
 
     @FXML
