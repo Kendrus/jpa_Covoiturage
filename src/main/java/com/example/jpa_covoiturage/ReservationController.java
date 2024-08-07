@@ -7,13 +7,11 @@ import com.example.jpa_covoiturage.Repository.ReservationRepository;
 import com.example.jpa_covoiturage.Repository.TrajetRepository;
 import com.example.jpa_covoiturage.Repository.UserRepository;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,6 +20,10 @@ import javafx.event.ActionEvent;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class ReservationController {
 
@@ -58,26 +60,23 @@ public class ReservationController {
     private ReservationRepository reservationRepository;
     private UserRepository userRepository;
     private TrajetRepository trajetRepository;
+
     public ReservationController() {
         this.userRepository = UserRepository.create();
         this.trajetRepository = TrajetRepository.create();
-        this.reservationRepository =ReservationRepository.create();
-
+        this.reservationRepository = ReservationRepository.create();
     }
+
     @FXML
     public void initialize() {
-        // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         userColumn.setCellValueFactory(new PropertyValueFactory<>("user"));
         trajetColumn.setCellValueFactory(new PropertyValueFactory<>("trajet"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
-        // Load users and trajets into ComboBoxes
         loadUsers();
         loadTrajets();
-
-        // Load reservations into TableView
         loadReservations();
     }
 
@@ -130,6 +129,7 @@ public class ReservationController {
 
             loadReservations();
             showInfoAlert("Réservation ajoutée avec succès.");
+            envoyerEmailConfirmation(reservation);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,14 +153,58 @@ public class ReservationController {
         alert.showAndWait();
     }
 
+    private void envoyerEmailConfirmation(Reservation reservation) {
+        String host = "sandbox.smtp.mailtrap.io";
+        final String user = "1b530204760f86";
+        final String password = "d0b25c0be4bfc7";
+
+        String to = reservation.getUser().getEmail();
+        String from = "sidoine@example.com";  // Modifié ici
+        String subject = "Confirmation de Réservation";
+        String body = "Bonjour " + reservation.getUser().getNom() + " " + reservation.getUser().getPrenom() + ",\n\n" +
+                "Votre réservation a été confirmée avec succès !\n\n" +
+                "Détails de la réservation :\n" +
+                "Trajet : " + reservation.getTrajet().getLieuDepart() + " -> " + reservation.getTrajet().getLieuArrivee() + "\n" +
+                "Date : " + reservation.getTrajet().getDateDepart() + "\n" +
+                "Heure : " + reservation.getTrajet().getHeureDepart() + "\n" +
+                "Nombre de places réservées : " + reservation.getTrajet().getPlacesDisponibles() + "\n" +
+                "Tarif : " + reservation.getTrajet().getPrix() + "\n\n" +
+                "Merci d'utiliser notre service de covoiturage.\n\n" +
+                "Cordialement,\n" +
+                "L'équipe de Covoiturage";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "2525");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        try {
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+                @Override
+                protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                    return new javax.mail.PasswordAuthentication(user, password);
+                }
+            });
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(body);
+
+            Transport.send(message);
+            System.out.println("Email envoyé avec succès à " + to);
+        } catch (Exception e) {
+            e.printStackTrace();
+            showErrorAlert("Erreur lors de l'envoi de l'email de confirmation : " + e.getMessage());
+        }
+    }
     private void showErrorAlert(String message) {
-        Alert alert = new Alert(AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    // Setters for repositories to be injected
-
 }

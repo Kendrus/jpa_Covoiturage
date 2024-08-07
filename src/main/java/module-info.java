@@ -3,7 +3,7 @@ module com.example.jpa_covoiturage {
     requires javafx.fxml;
     requires jakarta.persistence;
     requires static lombok;
-
+     requires java.mail;
     requires org.hibernate.orm.core;
     requires java.persistence;
     opens com.example.jpa_covoiturage to javafx.fxml;
