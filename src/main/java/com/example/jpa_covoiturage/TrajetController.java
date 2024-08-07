@@ -206,18 +206,17 @@ public class TrajetController {
     }
 
     @FXML
-    private void handleReturnToDashboard() {
+    private void goToDashboard() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) btnRetour.getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Tableau de Bord");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/jpa_covoiturage/dashboard.fxml"));
+            Parent dashboardRoot = loader.load();
+            Scene dashboardScene = new Scene(dashboardRoot);
+            Stage stage = (Stage) tableViewTrajets.getScene().getWindow();
+            stage.setScene(dashboardScene);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            afficherErreur("Erreur", "Impossible de retourner au tableau de bord : " + e.getMessage());
+            afficherErreur("Error", "Unable to load dashboard.fxml");
         }
     }
 }

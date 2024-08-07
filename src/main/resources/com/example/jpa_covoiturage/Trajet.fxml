@@ -10,8 +10,10 @@
             stylesheets="@trajet.css">
     <VBox spacing="20">
         <VBox spacing="20">
-            <HBox alignment="CENTER" styleClass="title-container">
+            <HBox alignment="CENTER_LEFT" styleClass="title-container">
                 <Text text="Gestion des Trajets" styleClass="page-title"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Retour au Dashboard" onAction="#goToDashboard" styleClass="dashboard-button"/>
             </HBox>
             <!-- Le reste de votre contenu reste inchangé -->
         </VBox>

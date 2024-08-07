@@ -11,6 +11,8 @@
 
     <HBox styleClass="header">
         <Label text="Réservations de Covoiturage" styleClass="title"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Retour au Dashboard" onAction="#goToDashboard" styleClass="dashboard-button"/>
     </HBox>
 
     <TabPane styleClass="tab-pane">
@@ -24,9 +26,6 @@
                     <TableColumn text="ID Utilisateur" fx:id="userIdColumn"/>
                     <TableColumn text="ID Trajet" fx:id="trajetIdColumn"/>
                     <TableColumn text="etat" fx:id="etatColumn"/>
-
-
-
                 </columns>
             </TableView>
         </Tab>

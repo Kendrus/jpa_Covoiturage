@@ -7,7 +7,11 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.jpa_covoiturage.UserController"
             styleClass="main-container" stylesheets="@user.css">
     <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
-        <Label text="Gestion des Utilisateurs" styleClass="title-label"/>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <Label text="Gestion des Utilisateurs" styleClass="title-label"/>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="Retour au Dashboard" onAction="#goToDashboard" styleClass="dashboard-button"/>
+        </HBox>
 
         <HBox spacing="20">
             <VBox spacing="10" styleClass="form-container" HBox.hgrow="ALWAYS">
@@ -39,8 +43,5 @@
                 <TableColumn fx:id="roleColumn" text="Rôle"/>
             </columns>
         </TableView>
-        <Button text="Retour au Tableau de Bord" onAction="#handleBackToDashboard" styleClass="action-button"/>
-
     </VBox>
-
 </AnchorPane>

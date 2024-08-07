@@ -8,6 +8,9 @@ import com.example.jpa_covoiturage.Repository.TrajetRepository;
 import com.example.jpa_covoiturage.Repository.UserRepository;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -17,7 +20,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
@@ -206,5 +211,19 @@ public class ReservationController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    private void goToDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/jpa_covoiturage/dashboard.fxml"));
+            Parent dashboardRoot = loader.load();
+            Scene dashboardScene = new Scene(dashboardRoot);
+            Stage stage = (Stage) reservationsTable.getScene().getWindow();
+            stage.setScene(dashboardScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Error");
+        }
     }
 }
