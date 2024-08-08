@@ -1,0 +1,98 @@
+.main-container {
+    -fx-padding: 20;
+    -fx-background-color: #F0F4C3; /* Jaune pâle pour le fond */
+}
+
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #33691E; /* Vert foncé pour le titre */
+}
+
+.chart-container {
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 10);
+    -fx-border-color: #FB8C00; /* Orange pour la bordure */
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+}
+
+.chart-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+    -fx-text-fill: #558B2F; /* Vert moyen pour les titres de graphiques */
+}
+
+.dashboard-button {
+    -fx-background-color: #8BC34A; /* Vert clair pour les boutons */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+}
+
+.dashboard-button:hover {
+    -fx-background-color: #689F38; /* Vert plus foncé au survol */
+}
+
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: #33691E; /* Vert foncé pour les étiquettes d'axe */
+}
+
+.chart-pie-label-line {
+    -fx-stroke: #FB8C00; /* Orange pour les lignes des étiquettes */
+    -fx-fill: #FB8C00;
+}
+
+.chart-pie-label {
+    -fx-fill: #E65100; /* Orange foncé pour les étiquettes */
+    -fx-font-size: 1em;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 20px;
+}
+
+.chart-legend-item-symbol {
+    -fx-background-radius: 0;
+}
+
+.chart-legend-item {
+    -fx-text-fill: #33691E; /* Vert foncé pour les éléments de légende */
+}
+
+.bar-chart {
+    -fx-bar-fill: #8BC34A; /* Vert clair pour les barres */
+}
+
+.pie-chart {
+    -fx-pie-color: #8BC34A, #689F38, #558B2F, #33691E, /* Verts */
+                   #FFA000, #FB8C00, #F57C00, #EF6C00, /* Oranges */
+                   #FFF59D, #FFF176, #FFEE58, #FFEB3B; /* Jaunes */
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #8BC34A; /* Vert clair pour la bordure */
+    -fx-border-radius: 5;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #8BC34A; /* Vert clair pour le bouton de la flèche */
+}
+
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #33691E; /* Vert foncé pour le texte des cellules */
+}
+
+.combo-box .list-view {
+    -fx-background-color: #F0F4C3; /* Jaune pâle pour le fond de la liste déroulante */
+}

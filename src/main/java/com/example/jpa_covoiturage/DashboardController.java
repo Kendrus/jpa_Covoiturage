@@ -101,7 +101,12 @@ public class DashboardController {
 
     @FXML
     private void handleReportsAndStats(ActionEvent event) {
-        showNotImplementedAlert("Rapports et statistiques");
+        try {
+            loadFXML(event, "ReportsAndStats.fxml", "Rapports et Statistiques");
+        } catch (IOException e) {
+            e.printStackTrace();
+            showErrorAlert("Erreur lors du chargement de la page des rapports et statistiques : " + e.getMessage());
+        }
     }
 
     @FXML

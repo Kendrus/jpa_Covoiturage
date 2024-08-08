@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.jpa_covoiturage.ReportsAndStatsController"
+      styleClass="main-container" stylesheets="@reports_and_stats.css" spacing="20">
+
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label text="Rapports et Statistiques" styleClass="title-label"/>
+        <Region HBox.hgrow="ALWAYS" />
+        <ComboBox fx:id="conducteurComboBox" promptText="Sélectionner un conducteur"/>
+        <Button text="Retour au Dashboard" onAction="#goToDashboard" styleClass="dashboard-button"/>
+    </HBox>
+
+    <HBox spacing="20">
+        <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+            <Label text="Nombre de trajets par mois" styleClass="chart-title"/>
+            <BarChart fx:id="trajetBarChart" title="Trajets par mois">
+                <xAxis>
+                    <CategoryAxis label="Mois"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Nombre de trajets"/>
+                </yAxis>
+            </BarChart>
+        </VBox>
+
+        <VBox styleClass="chart-container" HBox.hgrow="ALWAYS">
+            <Label text="Revenus par mois" styleClass="chart-title"/>
+            <PieChart fx:id="revenuPieChart" title="Revenus par mois"/>
+        </VBox>
+    </HBox>
+
+</VBox>

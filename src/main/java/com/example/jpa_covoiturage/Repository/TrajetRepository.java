@@ -2,6 +2,7 @@ package com.example.jpa_covoiturage.Repository;
 
 import com.example.jpa_covoiturage.Model.Reservation;
 import com.example.jpa_covoiturage.Model.Trajet;
+import com.example.jpa_covoiturage.Model.User;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -72,6 +73,16 @@ public class TrajetRepository {
 
     public Trajet findById(Long id) {
         return em.find(Trajet.class, id);
+    }
+    public List<Trajet> findByConducteur(User conducteur) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Trajet> query = em.createQuery("SELECT t FROM Trajet t WHERE t.conducteur = :conducteur", Trajet.class);
+            query.setParameter("conducteur", conducteur);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
 }
